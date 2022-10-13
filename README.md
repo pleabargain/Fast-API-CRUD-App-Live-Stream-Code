@@ -2,6 +2,24 @@
 pip install sqlalchemy
 
 
+
+# to view the DB in VS code
+I use the extension: 
+
+vscode-sqlite
+
+
+# view the docs
+http://127.0.0.1:8000/docs
+
+# add a new todo item
+http://127.0.0.1:8000/docs#/default/addItem__post
+
+# to do 
+* create a jinja template and render the database 'items'
+
+
+
 # Dennis Ivy FastAPI CRUD App
 This is a simple app designed to play around with FastAPI with a basic CRUD app.
 The article accompanying the app can be found at https://medium.com/@dennisivy/my-first-crud-app-with-fast-api-74ac190d2dcc and the livestreamed video can be seen at https://www.youtube.com/watch?v=FOZNYBu8u18.

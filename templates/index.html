@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>My First Web App</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+
+    {% for item in items %}
+        <p>{{ item.task }}</p>
+        
+        <p>{{ item.id }}</p>
+        <hr>
+    {% endfor %}
+    
+
+</html>

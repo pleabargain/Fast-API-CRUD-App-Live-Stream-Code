@@ -1,4 +1,7 @@
 from fastapi import FastAPI, Body, Depends
+from fastapi.templating import Jinja2Templates
+from requests import request
+
 import schemas
 import models
 
@@ -6,6 +9,8 @@ from database import Base, engine, SessionLocal
 from sqlalchemy.orm import Session 
 
 Base.metadata.create_all(engine)
+
+TEMPLATES = Jinja2Templates(directory="templates")
 
 def get_session():
     session = SessionLocal()
@@ -16,16 +21,28 @@ def get_session():
 
 app = FastAPI()
 
-fakeDatabase = {
-    1:{'task':'Clean car'},
-    2:{'task':'Write blog'},
-    3:{'task':'Start stream'},
-}
+# fakeDatabase = {
+#     1:{'task':'Clean car'},
+#     2:{'task':'Write blog'},
+#     3:{'task':'Start stream'},
+# }
 
 @app.get("/")
+# returns all items in the database
 def getItems(session: Session = Depends(get_session)):
     items = session.query(models.Item).all()
-    return items
+    # return items
+    return TEMPLATES.TemplateResponse(
+        "index.html",
+        {"request": request, "items": items},
+    )
+
+# works
+# http://127.0.0.1:8000/4
+
+
+# doesnt' work
+# http://127.0.0.1:8000/templates/index.html/
 
 @app.get("/{id}")
 def getItem(id:int, session: Session = Depends(get_session)):
