@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Body, Depends
+from fastapi import FastAPI, Body, Depends, Form, Request
 from fastapi.templating import Jinja2Templates
-from requests import request
 
+from requests import request
 import schemas
 import models
 
@@ -12,6 +12,9 @@ Base.metadata.create_all(engine)
 
 TEMPLATES = Jinja2Templates(directory="templates")
 
+app = FastAPI()
+
+
 def get_session():
     session = SessionLocal()
     try:
@@ -19,23 +22,39 @@ def get_session():
     finally:
         session.close()
 
-app = FastAPI()
+@app.get('/')
+def read_root():
+    return 'hello world'
+    # http://127.0.0.1:8000/
 
-# fakeDatabase = {
-#     1:{'task':'Clean car'},
-#     2:{'task':'Write blog'},
-#     3:{'task':'Start stream'},
-# }
 
-# @app.get("/")
-# # returns all items in the database
-# def getItems(session: Session = Depends(get_session)):
+@app.get("/table")
+# def showtable():
+#     return 'here is a table'
+#     # http://127.0.0.1:8000/table
+def getitems(request: Request, db: Session = Depends(get_session)):
+    items = db.query(models.Item).all()
+    return TEMPLATES.TemplateResponse("new_table.html", {"request": request, "items": items})
+ 
+
+
+
+
+    # http://
+# # def getItems(session: Session = Depends(get_session)) -> dict:
+#     # this gives 
+#     # http://127.0.0.1:8000/table
+#     # return "The items in the database are:" 
 #     items = session.query(models.Item).all()
+#     # return templates.TemplateResponse('form.html', context={'request': request, 'result': result})
+
 #     # return items
 #     return TEMPLATES.TemplateResponse(
-#         "index.html",
-#         {"request": request, "items": items},
-#     )
+#             "index.html",
+#             context={"request": request, "items": items},
+# )
+
+
 
 # works
 # http://127.0.0.1:8000/4

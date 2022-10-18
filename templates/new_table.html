@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>My First Web App</title>
+    </head>
+    <body>
+        <h1>Hello Table World!</h1>
+    </body>
+<!-- create a table in html -->
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Task</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}    </td>
+            <td>{{ item.task }}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>            
+        <hr>
+    
+</html>

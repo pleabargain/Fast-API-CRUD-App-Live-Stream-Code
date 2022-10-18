@@ -17,7 +17,11 @@ http://127.0.0.1:8000/docs#/default/addItem__post
 
 # to do 
 * create a jinja template and render the database 'items'
+* create a template that takes a new item and adds it to the task database
 
+
+# to review
+https://cookiecutter-fastapi.readthedocs.io/en/latest/userguide.html
 
 
 # Dennis Ivy FastAPI CRUD App
