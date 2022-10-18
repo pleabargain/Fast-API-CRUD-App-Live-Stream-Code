@@ -27,15 +27,15 @@ app = FastAPI()
 #     3:{'task':'Start stream'},
 # }
 
-@app.get("/")
-# returns all items in the database
-def getItems(session: Session = Depends(get_session)):
-    items = session.query(models.Item).all()
-    # return items
-    return TEMPLATES.TemplateResponse(
-        "index.html",
-        {"request": request, "items": items},
-    )
+# @app.get("/")
+# # returns all items in the database
+# def getItems(session: Session = Depends(get_session)):
+#     items = session.query(models.Item).all()
+#     # return items
+#     return TEMPLATES.TemplateResponse(
+#         "index.html",
+#         {"request": request, "items": items},
+#     )
 
 # works
 # http://127.0.0.1:8000/4

@@ -6,7 +6,7 @@ pip install sqlalchemy
 # to view the DB in VS code
 I use the extension: 
 
-vscode-sqlite
+## vscode-sqlite
 
 
 # view the docs
