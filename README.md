@@ -21,6 +21,11 @@ http://127.0.0.1:8000/docs#/default/addItem__post
 # see all items in FastAPI
 http://127.0.0.1:8000/docs#/default/getitems_table_get
 
+# view as a table
+http://127.0.0.1:8000/table
+
+# view as a basic list
+http://127.0.0.1:8000/index
 
 
 # done
@@ -29,12 +34,17 @@ http://127.0.0.1:8000/table
 
 # to do 
 * create a template form that takes a new item and adds it to the task database
-* add footers and headers
+* create a search form
+* add footers templates/static
+* add headers template with favico templates/static
+* add css templates/static
 
 
 # to review
-https://cookiecutter-fastapi.readthedocs.io/en/latest/userguide.html
+* https://cookiecutter-fastapi.readthedocs.io/en/latest/userguide.html
 
+# courses
+* https://academy.christophergs.com/courses/fastapi-for-busy-engineers/
 
 # ORIGINAL README : Dennis Ivy FastAPI CRUD App
 This is a simple app designed to play around with FastAPI with a basic CRUD app.

@@ -1,0 +1,15 @@
+<!-- create a jinja form that will allow the user to add a task to the database -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="http://www.google.com/favicon.ico" />
+
+        <title>task</title>
+    </head>
+    <body>
+        <h1>Add a Task</h1>
+        <form action="/post" method="POST">
+            <input type="text" name="task" />
+            <input type="submit" value="Add Task" />
+        </form>
+    </body>

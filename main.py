@@ -4,9 +4,10 @@ from fastapi.templating import Jinja2Templates
 from requests import request
 import schemas
 import models
+import sqlalchemy
 
-from database import Base, engine, SessionLocal
 from sqlalchemy.orm import Session 
+from database import Base, engine, SessionLocal
 
 Base.metadata.create_all(engine)
 
@@ -24,27 +25,35 @@ def get_session():
 
 @app.get('/')
 def read_root():
-    return 'hello world'
+    return 'Hello world. Please read the README.md file for more information'
     # http://127.0.0.1:8000/
 
 
+
+# test it here
+# http://127.0.0.1:8000/table
 @app.get("/table")
-#     return 'here is a table'
-#     # http://127.0.0.1:8000/table
 def getitems(request: Request, db: Session = Depends(get_session)):
     items = db.query(models.Item).all()
     return TEMPLATES.TemplateResponse("new_table.html", {"request": request, "items": items})
  
 @app.get("/index")
 # http://127.0.0.1:8000/index
-# returns Hello world!!! ?
-# def index(request: Request):
-#     return TEMPLATES.TemplateResponse("index.html", {"request": request})
+
 def getitems(request: Request, db: Session = Depends(get_session)):
     items = db.query(models.Item).all()
-    return TEMPLATES.TemplateResponse("index.html", {"request": request, "items": items})
+    return TEMPLATES.TemplateResponse("index.html", 
+                                {"request": request, 
+                                "items": items})
  
 
+@app.post("/add_task.html")
+def add_task(request: Request, db: Session = Depends(get_session)):
+    task = request.form.get("task")
+    item = models.Item(task=task)
+    db.add(item)
+    db.commit()
+    return TEMPLATES.TemplateResponse("add_task.html", {"request": request})
 
 # works
 # http://127.0.0.1:8000/4
@@ -58,12 +67,7 @@ def getItem(id:int, session: Session = Depends(get_session)):
     item = session.query(models.Item).get(id)
     return item
 
-#option #1
-# @app.post("/")
-# def addItem(task:str):
-#     newId = len(fakeDatabase.keys()) + 1
-#     fakeDatabase[newId] = {"task":task}
-#     return fakeDatabase
+
 
 #Option #2
 @app.post("/")
@@ -74,6 +78,7 @@ def addItem(item:schemas.Item, session: Session = Depends(get_session)):
     session.refresh(item)
 
     return item
+
 
 
 
