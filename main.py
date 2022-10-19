@@ -29,31 +29,21 @@ def read_root():
 
 
 @app.get("/table")
-# def showtable():
 #     return 'here is a table'
 #     # http://127.0.0.1:8000/table
 def getitems(request: Request, db: Session = Depends(get_session)):
     items = db.query(models.Item).all()
     return TEMPLATES.TemplateResponse("new_table.html", {"request": request, "items": items})
  
-
-
-
-
-    # http://
-# # def getItems(session: Session = Depends(get_session)) -> dict:
-#     # this gives 
-#     # http://127.0.0.1:8000/table
-#     # return "The items in the database are:" 
-#     items = session.query(models.Item).all()
-#     # return templates.TemplateResponse('form.html', context={'request': request, 'result': result})
-
-#     # return items
-#     return TEMPLATES.TemplateResponse(
-#             "index.html",
-#             context={"request": request, "items": items},
-# )
-
+@app.get("/index")
+# http://127.0.0.1:8000/index
+# returns Hello world!!! ?
+# def index(request: Request):
+#     return TEMPLATES.TemplateResponse("index.html", {"request": request})
+def getitems(request: Request, db: Session = Depends(get_session)):
+    items = db.query(models.Item).all()
+    return TEMPLATES.TemplateResponse("index.html", {"request": request, "items": items})
+ 
 
 
 # works
@@ -85,12 +75,6 @@ def addItem(item:schemas.Item, session: Session = Depends(get_session)):
 
     return item
 
-#Option #3
-# @app.post("/")
-# def addItem(body = Body()):
-#     newId = len(fakeDatabase.keys()) + 1
-#     fakeDatabase[newId] = {"task":body['task']}
-#     return fakeDatabase
 
 
 @app.put("/{id}")
