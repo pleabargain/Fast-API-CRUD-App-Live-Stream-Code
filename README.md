@@ -1,3 +1,6 @@
+# url for this repo
+https://github.com/pleabargain/Fast-API-CRUD-App-Live-Stream-Code
+
 # before running " uvicorn main:app --reload "  you need to install sqlalchemy
 pip install sqlalchemy
 
@@ -34,6 +37,7 @@ http://127.0.0.1:8000/table
 
 # to do 
 * create a template form that takes a new item and adds it to the task database
+    * this has proven very difficult :(
 * create a search form
 * add footers templates/static
 * add headers template with favico templates/static
