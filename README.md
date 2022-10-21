@@ -42,6 +42,7 @@ http://127.0.0.1:8000/table
 
 # to review
 * https://cookiecutter-fastapi.readthedocs.io/en/latest/userguide.html
+* https://www.gormanalysis.com/blog/building-and-deploying-rock-paper-scissors-with-python-fastapi-and-deta/
 
 # courses
 * https://academy.christophergs.com/courses/fastapi-for-busy-engineers/

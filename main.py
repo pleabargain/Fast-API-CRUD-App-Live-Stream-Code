@@ -29,8 +29,6 @@ def read_root():
     # http://127.0.0.1:8000/
 
 
-
-# test it here
 # http://127.0.0.1:8000/table
 @app.get("/table")
 def getitems(request: Request, db: Session = Depends(get_session)):
@@ -39,21 +37,29 @@ def getitems(request: Request, db: Session = Depends(get_session)):
  
 @app.get("/index")
 # http://127.0.0.1:8000/index
-
 def getitems(request: Request, db: Session = Depends(get_session)):
     items = db.query(models.Item).all()
     return TEMPLATES.TemplateResponse("index.html", 
                                 {"request": request, 
+
+
                                 "items": items})
  
+# https://eugeneyan.com/writing/how-to-set-up-html-app-with-fastapi-jinja-forms-templates/
+# http://127.0.0.1:8000/form
+@app.get("/form")
+def form_post(request: Request):
+    result = "Type a task and click submit"
+    return TEMPLATES.TemplateResponse('form.html', context={'request': request, 'result': result})
 
-@app.post("/add_task.html")
-def add_task(request: Request, db: Session = Depends(get_session)):
-    task = request.form.get("task")
-    item = models.Item(task=task)
-    db.add(item)
-    db.commit()
-    return TEMPLATES.TemplateResponse("add_task.html", {"request": request})
+# http://127.0.0.1:8000/form
+@app.post("/form")
+def form_post(request: Request, task: str = Form(...)):
+    result = addItem(task)
+
+    return TEMPLATES.TemplateResponse('form.html', 
+                context={'request': request, 'result': result.task})
+
 
 # works
 # http://127.0.0.1:8000/4
@@ -76,10 +82,7 @@ def addItem(item:schemas.Item, session: Session = Depends(get_session)):
     session.add(item)
     session.commit()
     session.refresh(item)
-
     return item
-
-
 
 
 @app.put("/{id}")
